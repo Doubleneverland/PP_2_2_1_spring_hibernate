@@ -3,6 +3,7 @@ package hiber.model;
 import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user_car")
@@ -47,4 +48,18 @@ public class Car {
         this.series = series;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, model, series);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Car car = (Car) obj;
+        return Objects.equals(id, car.id) &&
+                Objects.equals(model, car.model) &&
+                Objects.equals(series, car.series);
+    }
 }
